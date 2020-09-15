@@ -18,6 +18,13 @@
 |
 */
 
-import Route from '@ioc:Adonis/Core/Route'
+import Route from "@ioc:Adonis/Core/Route";
 
-Route.on('/').render('welcome')
+Route.on("/").render("dashboard");
+Route.get("/customers", "CustomersController.index");
+Route.get("/customers/new", "CustomersController.create");
+Route.get("/companies", "CompaniesController.index");
+Route.get("/companies/new", "CompaniesController.create");
+Route.get("/login", "AuthController.show");
+Route.post("/login", "AuthController.login");
+Route.get("/logout", "AuthController.logout");

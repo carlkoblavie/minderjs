@@ -9,7 +9,7 @@
 |
 */
 
-import Server from '@ioc:Adonis/Core/Server'
+import Server from "@ioc:Adonis/Core/Server";
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +21,10 @@ import Server from '@ioc:Adonis/Core/Server'
 |
 */
 Server.middleware.register([
-  'Adonis/Core/BodyParserMiddleware',
-])
+  "Adonis/Core/BodyParserMiddleware",
+  "Adonis/Addons/ShieldMiddleware",
+  "App/Middleware/SilentAuth",
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -41,4 +43,5 @@ Server.middleware.register([
 |
 */
 Server.middleware.registerNamed({
-})
+  auth: "App/Middleware/Auth",
+});

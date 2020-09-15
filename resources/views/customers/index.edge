@@ -1,0 +1,29 @@
+@layout('layouts/app')
+
+@section('content')
+	<nav class="level">
+    <div class="level-left">
+      <div class="level-item">
+        <p class="subtitle is-5">
+          Customers
+        </p>
+      </div>
+      <div class="level-item">
+        <div class="field has-addons">
+          <p class="control">
+            <input class="input" type="text" placeholder="Find a customer">
+          </p>
+          <p class="control">
+            <button class="button">
+              Search
+            </button>
+          </p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="level-right">
+      <p class="level-item"><a class="button is-success" href="/customers/new">New</a></p>
+    </div>
+  </nav>
+@endsection
