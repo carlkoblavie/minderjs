@@ -26,4 +26,24 @@
       <p class="level-item"><a class="button is-success" href="/companies/new">New</a></p>
     </div>
   </nav>
+  <div class="box">
+    <table class="table is-striped is-narrow is-fullwidth">
+      <tbody>
+        <thead>
+          <tr>
+            <td>Company</td>
+            <td>Location</td>
+            <td>Action</td>
+          </tr>
+        </thead>
+        @each(company in companies)
+          <tr>
+            <td>{{company.name}}</td>
+            <td>{{company.location}}</td>
+            <td>Edit | Delete</td>
+          </tr>
+        @endeach
+      </tbody>
+    </table>
+  </div>
 @endsection

@@ -25,6 +25,7 @@ Route.get("/customers", "CustomersController.index");
 Route.get("/customers/new", "CustomersController.create");
 Route.get("/companies", "CompaniesController.index");
 Route.get("/companies/new", "CompaniesController.create");
+Route.post("/companies", "CompaniesController.store");
 Route.get("/login", "AuthController.show");
 Route.post("/login", "AuthController.login");
 Route.get("/logout", "AuthController.logout");

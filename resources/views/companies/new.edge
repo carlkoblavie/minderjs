@@ -7,23 +7,37 @@
 
 		<div class="columns is-centered">
 			<div class="column is-one-third">
+				@if(flashMessages.has('success'))
+					<div class="notification is-success is-light">
+						<p>{{ flashMessages.get('success') }}</p>
+					</div>
+				@endif
+			<form action="{{ route('CompaniesController.store') }}" method="POST">
+				{{ csrfField() }}
 				<div class="field">
+					@if(flashMessages.has('errors.name'))
+						<p class="help is-danger">{{ flashMessages.get('errors.name') }}</p>
+					@endif
 					<label class="label">Name</label>
 					<div class="control">
-						<input class="input" type="text" placeholder="Company name">
+					<input value="{{ flashMessages.get('name') || '' }}" name='name' class="input" type="text" placeholder="Company name">
 					</div>
 				</div>
 				<div class="field">
+					@if(flashMessages.has('errors.location'))
+						<p class="help is-danger">{{ flashMessages.get('errors.location') }}</p>
+					@endif
 					<label class="label">Location</label>
 					<div class="control">
-						<input class="input" type="text" placeholder="Location">
+						<input value="{{ flashMessages.get('location') || '' }}" name='location' class="input" type="text" placeholder="Location">
 					</div>
 				</div>
 				<div class="field is-grouped">
 					<div class="control">
-						<button class="button is-link">Submit</button>
+						<button type='submit' class="button is-link">Submit</button>
 					</div>
 				</div>
+				</form>
 			</div>
 		</div>
 	</div>
