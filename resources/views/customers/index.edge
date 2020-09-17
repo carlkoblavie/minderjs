@@ -1,6 +1,15 @@
 @layout('layouts/app')
 
 @section('content')
+    <div class="columns is-centered">
+			<div class="column is-one-third">
+        @if(flashMessages.has('success'))
+          <div class="notification is-success is-light has-text-centered">
+            <p>{{ flashMessages.get('success') }}</p>
+          </div>
+        @endif
+      </div>
+    </div>
 	<nav class="level">
     <div class="level-left">
       <div class="level-item">
@@ -26,4 +35,35 @@
       <p class="level-item"><a class="button is-success" href="/customers/new">New</a></p>
     </div>
   </nav>
+  <div class="box">
+    <table class="table is-striped is-fullwidth">
+      <thead>
+        <tr>
+          <td>First Name</td>
+          <td>Last Name</td>
+          <td>Location</td>
+          <td>Gender</td>
+          <td>Phone Number</td>
+          <td>Email</td>
+          <td>Meta</td>
+          <td>Action</td>
+        </tr>
+      </thead>
+      <tbody>
+        @each(customer in customers)
+          <tr>
+            <td>{{customer.first_name}}</td>
+            <td>{{customer.last_name}}</td>
+            <td>{{customer.location ? customer.location : ' - '}}</td>
+            <td>{{customer.gender}}</td>
+            <td>{{customer.phone_number}}</td>
+            <td>{{customer.email ? customer.email : ' - '}}</td>
+            <td>{{customer.meta ? customer.meta : ' - '}}</td>
+          <td><a href='/customers/{{customer.id}}/edit' class='is-link'>Edit</a> | 
+            <a class='is-link' onclick="return confirm('Are you sure?')" href='/customers/{{customer.id}}/delete'>Delete</a></td>
+          </tr>
+        @endeach
+      </tbody>
+    </table>
+  </div>
 @endsection

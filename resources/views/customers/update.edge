@@ -2,7 +2,7 @@
 
 @section('content')
 	<div class="container">
-		<h1 class="title">New Customer</h1>
+		<h1 class="title">Update Customer</h1>
 		<hr>
 
 		<div class="columns is-centered">
@@ -12,7 +12,7 @@
 						<p>{{ flashMessages.get('success') }}</p>
 					</div>
 				@endif
-				<form action="{{ route('CustomersController.store') }}" method="POST">
+				<form action="/customers/{{customer.id}}" method="post">
 					{{ csrfField() }}
 					<div class="field">
 						@if(flashMessages.has('errors.first_name'))
@@ -20,7 +20,7 @@
 						@endif
 						<label class="label">First Name</label>
 						<div class="control">
-						<input value="{{ flashMessages.get('first_name') || '' }}" name='first_name' class="input" type="text" placeholder="First Name">
+						<input value="{{ customer.first_name }}" name='first_name' class="input" type="text" placeholder="First Name">
 						</div>
 					</div>
 					<div class="field">
@@ -29,7 +29,7 @@
 						@endif
 						<label class="label">Last Name</label>
 						<div class="control">
-						<input value="{{ flashMessages.get('last_name') || '' }}" name='last_name' class="input" type="text" placeholder="Last Name">
+						<input value="{{ customer.last_name }}" name='last_name' class="input" type="text" placeholder="Last Name">
 						</div>
 					</div>
 
@@ -39,7 +39,7 @@
 						@endif
 						<label class="label">Location</label>
 						<div class="control">
-							<input value="{{ flashMessages.get('location') || '' }}" name='location' class="input" type="text" placeholder="Location">
+							<input value="{{ customer.location  || '' }}" name='location' class="input" type="text" placeholder="Location">
 						</div>
 					</div>
 					
@@ -49,7 +49,7 @@
 						@endif
 						<label class="label">Phone Number</label>
 						<div class="control">
-							<input value="{{ flashMessages.get('phone_number') || '' }}" name='phone_number' class="input" type="text" placeholder="Phone Number">
+							<input value="{{ customer.phone_number }}" name='phone_number' class="input" type="text" placeholder="Phone Number">
 						</div>
 					</div>
 					<input  name='company_id' class="input" type="hidden" value={{ auth.user.company_id}}>
@@ -60,7 +60,7 @@
 						@endif
 						<label class="label">Email</label>
 						<div class="control has-icons-left has-icons-right">
-							<input class="input is-danger" name='email' type="email" placeholder="Email input" value="{{ flashMessages.get('email') || '' }}">
+							<input class="input" name='email' type="email" placeholder="Email input" value="{{ customer.email || ''  }}">
 							<span class="icon is-small is-left">
 								<i class="fas fa-envelope"></i>
 							</span>
@@ -79,8 +79,8 @@
 							<div class="select">
 								<select name="gender">
 									<option value="">Please select</option>
-									<option value="male">Male</option>
-									<option	value="female">Female</option>
+									<option value="male" {{customer.gender === 'male' ? 'selected' : ''}}>Male</option>
+									<option	value="female" {{customer.gender === 'female' ? 'selected' : ''}}>Female</option>
 								</select>
 							</div>
 						</div>
@@ -89,13 +89,13 @@
 					<div class="field">
 						<label class="label">Meta</label>
 						<div class="control">
-							<textarea value="value="{{ flashMessages.get('meta') || '' }}"" name='meta' lass="textarea" placeholder="Textarea"></textarea>
+							<textarea value="" name='meta' lass="textarea" placeholder="Textarea">{{ customer.meta || '' }}</textarea>
 						</div>
 					</div>
 					
 					<div class="field is-grouped">
 						<div class="control">
-							<button type='submit' class="button is-link">Submit</button>
+							<button type='submit' class="button is-link">Update</button>
 						</div>
 					</div>
 				</form>
