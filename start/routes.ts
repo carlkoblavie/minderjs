@@ -21,12 +21,14 @@
 import Route from "@ioc:Adonis/Core/Route";
 
 Route.on("/").render("dashboard");
-Route.get("/customers", "CustomersController.index");
-Route.get("/customers/new", "CustomersController.create");
-Route.post("/customers", "CustomersController.store");
+Route.get("/customers/:id?", "CustomersController.index");
+Route.get("/customers/create/new", "CustomersController.create");
 Route.get("/customers/:id/edit", "CustomersController.edit");
-Route.post("/customers/:id", "CustomersController.update");
 Route.get("/customers/:id/delete", "CustomersController.delete");
+Route.get("/search/customer/:query", "CustomersController.search");
+Route.post("/customers", "CustomersController.store");
+
+Route.post("/customers/:id", "CustomersController.update");
 Route.get("/companies", "CompaniesController.index");
 Route.get("/companies/new", "CompaniesController.create");
 Route.post("/companies", "CompaniesController.store");

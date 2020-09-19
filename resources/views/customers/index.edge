@@ -1,5 +1,4 @@
 @layout('layouts/app')
-
 @section('content')
     <div class="columns is-centered">
 			<div class="column is-one-third">
@@ -13,26 +12,29 @@
 	<nav class="level">
     <div class="level-left">
       <div class="level-item">
-        <p class="subtitle is-5">
-          Customers
-        </p>
       </div>
       <div class="level-item">
-        <div class="field has-addons">
+        <div class="field">
           <p class="control">
-            <input class="input" type="text" placeholder="Find a customer">
-          </p>
-          <p class="control">
-            <button class="button">
-              Search
-            </button>
+            <div x-data="initSearch()">
+              <input
+                class="input"
+                x-model="query"
+                x-on:keyup="search()"
+                type="search"
+                placeholder="Search a customer, by first name, last name or phone number"
+              >
+              <div x-show="query" style="display: none">
+              <div x-show="resultsHtml" x-html="resultsHtml"></div>
+              </div>
+            </div>
           </p>
         </div>
       </div>
     </div>
   
     <div class="level-right">
-      <p class="level-item"><a class="button is-success" href="/customers/new">New</a></p>
+      <p class="level-item"><a class="button is-success" href="/customers/create/new">New</a></p>
     </div>
   </nav>
   <div class="box">
@@ -66,4 +68,5 @@
       </tbody>
     </table>
   </div>
+  
 @endsection

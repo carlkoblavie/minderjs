@@ -3,17 +3,32 @@ import { schema, rules } from "@ioc:Adonis/Core/Validator";
 import Customer from "App/Models/Customer";
 
 export default class CustomersController {
-  public async index({ view, auth }: HttpContextContract) {
-    const customers = await Customer.query().where(
-      "company_id",
-      auth.user.company_id
-    );
-    return view.render("customers/index", { customers });
+  public async index({ view, auth, params }: HttpContextContract) {
+    if (params.id) {
+      const customer = await Customer.findOrFail(params.id);
+      return view.render("customers/index", { customers: [customer] });
+    } else {
+      const customers = await Customer.query().where(
+        "company_id",
+        auth.user.company_id
+      );
+      return view.render("customers/index", { customers });
+    }
   }
 
   public async edit({ view, params }: HttpContextContract) {
     const customer = await Customer.findOrFail(params.id);
     return view.render("customers/update", { customer });
+  }
+
+  public async search({ response, params }) {
+    const { query } = params;
+    const results = await Customer.query()
+      .where("first_name", "rlike", query)
+      .orWhere("last_name", "rlike", query)
+      .orWhere("phone_number", "rlike", query);
+
+    return response.send({ data: results });
   }
 
   public async update({
